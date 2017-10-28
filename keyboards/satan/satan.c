@@ -1,6 +1,10 @@
 #include "satan.h"
 #include "led.h"
 
+extern inline void satan_caps_led_on(void);
+extern inline void satan_caps_led_off(void);
+
+
 void matrix_init_kb(void) {
 	// put your keyboard start-up code here
 	// runs once when the firmware starts up
