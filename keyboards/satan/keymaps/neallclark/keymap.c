@@ -25,7 +25,7 @@ enum {
 enum {
   ESC_ALTF4 = 0, // Single tap = ESCAPE; Triple tap = ALT+F4
   CTRL_CAD,      // Single tap (or hold) = CTRL; Triple tap = CTRL+ALT+DEL
-  MINUS_ARROW    // Single tap = minus; Double Tap = ->
+  MINUS_ARROW    // Single tap = minus; Triple Tap = ->
 };
 
 // increase readability
@@ -148,12 +148,11 @@ void escape_and_altf4_tapdance(qk_tap_dance_state_t *state, void *user_data) {
 }
 
 void minus_arrow_tapdance(qk_tap_dance_state_t *state, void *user_data) {
-  if(state->count == 1) {
-    TAP(KC_MINS);
-  }
-  else if (state->count == 2) {
-    TAP(KC_MINS);
-    TAP_WITH_MOD(KC_LSHIFT, KC_DOT);
+  switch(state->count)
+  {
+    case 1: TAP(KC_MINS); break;
+    case 2: TAP(KC_MINS); TAP(KC_MINS); break;
+    case 3: TAP(KC_MINS); TAP_WITH_MOD(KC_LSHIFT, KC_DOT); break;
   }
 }
 
