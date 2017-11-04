@@ -5,7 +5,8 @@
 #define _FL  1  // Momentary Function Layer
 #define _FLM 2  // Macro and miscleanous function layer
 #define _FLN 3  // Numpad function layer 
-#define _FLA 4  // Function layer with arrow nav cluster
+#define _FLA 4  // Arrow nav cluster
+#define _FLP 5  // Pointer device (err.... mouse but I'd used m already :) )
 
 enum satan_keycodes {
   QWERTY = SAFE_RANGE,
@@ -54,11 +55,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
 [ _BL ] = KEYMAP_ISO(
-  TD(ESC_ALTF4), KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,TD(MINUS_ARROW),KC_EQL,KC_BSPC,\
+  TD(ESC_ALTF4), KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,KC_BSPC,   \
  RCTL_T(KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,          \
  LT(_FL,KC_BSPC),KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,  \
         KC_LSPO, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,          \
-   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                               MO(_FLM),MO(_FL), KC_APP, KC_RCTL),
+   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                               MO(_FLM),MO(_FL), LT(_FLP,KC_APP),KC_RCTL),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]
@@ -89,11 +90,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         Caps     A        S        D        F        G        H        J        K        L        ;        '        #        Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-[ _FLA ] = KEYMAP_ISO( //Mostly mouse layer with option for caps too
+[ _FLA ] = KEYMAP_ISO( //Arrow cluster layer
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-        _______, _______, _______, _______, _______, _______, _______, _______, KC_MS_U, _______, _______, _______, _______,          \
-        _______, _______, _______, _______, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, _______, _______, \
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UP,   _______,          \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UP,   LSFT_T(KC_SLASH), \
         _______, _______, _______,          _______,                                              KC_LEFT, KC_DOWN, KC_RIGHT,TO(_BL)),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
@@ -101,14 +102,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         Caps     A        S        D        F        G        H        J        K        L        ;        '        #        Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-[ _FLM ] = KEYMAP_ISO( //Functions/settings
+[ _FLM ] = KEYMAP_ISO( //Macros and access to deeper layers
         _______, TO(_FLM),TO(_FLA),TO(_FLN),_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______, _______, _______, _______, _______, _______, _______,M(M_USER),_______, _______, _______, _______, _______,          \
         _______, BL_STEP, _______, BL_TOGG, _______, _______, _______, _______, _______, M(M_LINE),_______, _______,_______, _______, \
   _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,   TO(_FLN),_______, _______, _______, M(M_COM),_______,  \
         _______, _______, _______,          TO(_FLA),                                             _______, _______,TO(_BL), TO(_BL)),
-};
 
+    /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
+        Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]
+        Caps     A        S        D        F        G        H        J        K        L        ;        '        #        Enter
+        Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift
+        Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
+  [ _FLP ] = KEYMAP_ISO( //Mostly mouse layer with option for caps too
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+      _______, KC_MS_BTN1,KC_WH_U,KC_MS_BTN2,_______,_______, _______, _______, KC_MS_U, _______, _______, _______, _______,          \
+        _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, _______, _______, \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          \
+        _______, _______, _______,          _______,                                              _______, _______, _______,TO(_BL)),
+};
 
 /*
     MACROS
@@ -147,6 +159,7 @@ void escape_and_altf4_tapdance(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
+//Turned this off for now, it made using this key in normal use a bit awkward
 void minus_arrow_tapdance(qk_tap_dance_state_t *state, void *user_data) {
   switch(state->count)
   {
@@ -282,6 +295,11 @@ void matrix_scan_user(void) {
       break;
 
     case _FLA:
+      backlight_set(0);
+      satan_caps_led_on();
+      break;
+
+    case _FLP:
       backlight_set(0);
       satan_caps_led_on();
       break;
