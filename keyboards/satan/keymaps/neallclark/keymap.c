@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  RCTL_T(KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,          \
  LT(_FL,KC_BSPC),KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,  \
         KC_LSPO, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,          \
-   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                               MO(_FLM),MO(_FL), LT(_FLP,KC_APP),KC_RCTL),
+   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                       MO(_FLM),MO(_FL), LT(_FLN,KC_APP),KC_RCTL),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    SFT_T(KC_GRV),KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, \
       _______, KC_MS_BTN1,KC_WH_U, KC_MS_BTN2,KC_DEL,_______, _______, KC_BSPC, KC_UP,   KC_DEL,  KC_PGUP, _______, _______,          \
         _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PGDN, _______, _______, _______, \
-  _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______, KC_END,  KC_MUTE, KC_MPRV, KC_MNXT, KC_MPLY, _______, \
+_______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_END,KC_MUTE,KC_MPRV,KC_MNXT,KC_MPLY,_______, \
         _______, _______, _______,          _______,                                              _______, _______, TO(_BL), _______),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
@@ -80,10 +80,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
 [ _FLN ] = KEYMAP_ISO( //Numpad and alt shortcuts
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-        _______, _______, KC_UP,   _______, _______, _______, _______, KC_4,    KC_5,    KC_6,    _______, _______, _______,          \
-        _______, KC_LEFT, KC_DOWN, KC_RIGHT,_______, _______, KC_HOME, KC_1,    KC_2,    KC_3,    _______, _______, _______, _______, \
-        _______, _______, _______, _______, _______, _______, _______, KC_END,  KC_0,    _______, _______, _______, _______,          \
-        _______, _______, _______,          _______,                                              _______, _______, TO(_BL), TO(_BL)),
+        _______, KC_7,    KC_8,    KC_9,    _______, _______, _______, KC_BSPC, KC_UP,   KC_DEL,  KC_PGUP, _______, _______,          \
+        _______, KC_4,    KC_5,    KC_6,    _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PGDN, _______, _______, _______, \
+        _______, _______, KC_1,    KC_2,    KC_3,    _______, _______, KC_END,  _______, _______, _______, _______, _______,          \
+        _______, _______, KC_0,             _______,                                              _______, _______, TO(_BL), TO(_BL)),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, TO(_FLM),TO(_FLA),TO(_FLN),_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______, _______, _______, _______, _______, _______, _______,M(M_USER),_______, _______, _______, _______, _______,          \
         _______, BL_STEP, _______, BL_TOGG, _______, _______, _______, _______, _______, M(M_LINE),_______, _______,_______, _______, \
-  _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,   TO(_FLN),_______, _______, _______, M(M_COM),_______,  \
+_______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FLN),TO(_FLP),_______,_______,M(M_COM),_______,  \
         _______, _______, _______,          TO(_FLA),                                             _______, _______,TO(_BL), TO(_BL)),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
