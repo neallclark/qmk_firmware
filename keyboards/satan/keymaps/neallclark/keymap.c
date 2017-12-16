@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  RCTL_T(KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,          \
  LT(_FL,KC_BSPC),KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_NUHS, KC_ENT,  \
         KC_LSPO, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSPC,          \
-   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                       MO(_FLM),MO(_FL), LT(_FLN,KC_APP),KC_RCTL),
+   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                      MO(_FLM),MO(_FL), LT(_FLN,KC_APP),KC_RCTL),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]
@@ -71,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       _______, KC_MS_BTN1,KC_WH_U, KC_MS_BTN2,KC_DEL,_______, _______, KC_BSPC, KC_UP,   KC_DEL,  KC_PGUP, _______, _______,          \
         _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PGDN, _______, _______, _______, \
 _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_END,KC_MUTE,KC_MPRV,KC_MNXT,KC_MPLY,_______, \
-        _______, _______, _______,          _______,                                              _______, _______, TO(_BL), _______),
+        _______, _______, _______,          _______,                                              _______, _______, _______, _______),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]
@@ -80,10 +80,10 @@ _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
 [ _FLN ] = KEYMAP_ISO( //Numpad and alt shortcuts
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-        _______, KC_7,    KC_8,    KC_9,    _______, _______, _______, KC_BSPC, KC_UP,   KC_DEL,  KC_PGUP, _______, _______,          \
-        _______, KC_4,    KC_5,    KC_6,    _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PGDN, _______, _______, _______, \
-        _______, _______, KC_1,    KC_2,    KC_3,    _______, _______, KC_END,  _______, _______, _______, _______, _______,          \
-        _______, _______, KC_0,             _______,                                              _______, _______, TO(_BL), TO(_BL)),
+        _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, _______, KC_BSPC, KC_UP,   KC_DEL,  KC_PGUP, _______, _______,          \
+        _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PGDN, _______, _______, _______, \
+        _______, _______, _______, KC_KP_0, KC_KP_1, KC_KP_2, KC_KP_3, KC_END,  _______, _______, _______, _______, _______,          \
+        _______, _______, _______,          _______,                                              _______, _______, _______, TO(_BL)),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        Backsp
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]
@@ -102,9 +102,9 @@ _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_
         Caps     A        S        D        F        G        H        J        K        L        ;        '        #        Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-[ _FLM ] = KEYMAP_ISO( //Macros and access to deeper layers
-        _______, TO(_FLM),TO(_FLA),TO(_FLN),_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-        _______, _______, _______, _______, _______, _______, _______,M(M_USER),_______, _______, _______, _______, _______,          \
+[ _FLM ] = KEYMAP_ISO( //Macros
+   LALT(KC_GRV), _______, _______, _______,_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+        _______, _______, _______, _______, _______, _______, _______,M(M_USER),_______, _______,KC_PAUSE, _______, _______,          \
         _______, BL_STEP, _______, BL_TOGG, _______, _______, _______, _______, _______, M(M_LINE),_______, _______,_______, _______, \
 _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FLN),TO(_FLP),_______,_______,M(M_COM),_______,  \
         _______, _______, _______,          TO(_FLA),                                             _______, _______,TO(_BL), TO(_BL)),
