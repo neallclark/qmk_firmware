@@ -60,8 +60,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   TD(ESC_ALTF4), KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_GRV, KC_PAUSE, \
  RCTL_T(KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSPC,         \
  LT(_FL,KC_BSPC),KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  \
-      KC_LSHIFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSHIFT,       MO(_FL),  \
-   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                      MO(_FLM),MO(_FL), LT(_FLN,KC_APP),KC_RCTL),             
+      KC_LSHIFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSHIFT,       LT(_FLM,KC_NONUS_HASH),  \
+   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                      KC_RALT,MO(_FL), LT(_FLN,KC_APP),KC_RCTL),             
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        ~       Pause
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        Backsp
@@ -106,7 +106,7 @@ _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
 [ _FLM ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( //Macros
    LALT(KC_GRV), RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______,  _______, _______,_______, \
-        _______, _______, _______, _______, _______, _______, _______,M(M_USER),_______, _______,KC_PAUSE, _______, _______,_______,          \
+        _______, _______, _______, _______, _______, _______, _______,M(M_USER),LSFT(KC_INS), _______,KC_PAUSE, _______, _______,_______,          \
         _______, BL_STEP, _______, BL_TOGG, _______, _______, _______, _______, _______, M(M_LINE),_______, _______,         _______, \
 _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FLN),TO(_FLP),_______,_______,M(M_COM),_______,        _______,\
         _______, _______, _______,          TO(_FLA),                                             _______, _______, TO(_BL), TO(_BL)),
