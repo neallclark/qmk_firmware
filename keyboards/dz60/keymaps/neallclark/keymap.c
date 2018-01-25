@@ -19,7 +19,9 @@ enum satan_keycodes {
 enum {
   M_USER = 0,
   M_LINE,
-  M_COM
+  M_COM,
+  M_ARW1,
+  M_ARW2
 };
 
 #include "dynamic_macro.h"
@@ -27,8 +29,7 @@ enum {
 // Tap Dance Declarations
 enum {
   ESC_ALTF4 = 0, // Single tap = ESCAPE; Triple tap = ALT+F4
-  CTRL_CAD,      // Single tap (or hold) = CTRL; Triple tap = CTRL+ALT+DEL
-  MINUS_ARROW    // Single tap = minus; Triple Tap = ->
+  CTRL_CAD      // Single tap (or hold) = CTRL; Triple tap = CTRL+ALT+DEL
 };
 
 // increase readability
@@ -56,11 +57,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         Caps     A        S        D        F        G        H        J        K        L        ;        '                 Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-[ _BL ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE(
+[ _BL ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( //Base Layer
   TD(ESC_ALTF4), KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_GRV, KC_PAUSE, \
  RCTL_T(KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSPC,         \
  LT(_FL,KC_BSPC),KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  \
-      KC_LSHIFT, KC_NUBS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSHIFT,       LT(_FLM,KC_NONUS_HASH),  \
+MT(MOD_LSFT,KC_HOME),KC_NUBS,KC_Z, KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT(MOD_RSFT,KC_END),LT(_FLM,KC_NONUS_HASH),  \
    TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                      KC_RALT,MO(_FL), LT(_FLN,KC_APP),KC_RCTL),             
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        ~       Pause
@@ -68,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         Caps     A        S        D        F        G        H        J        K        L        ;        '                 Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-[ _FL ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE(
+[ _FL ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( //Main Function Layer
    SFT_T(KC_GRV),KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,_______, \
       _______, KC_MS_BTN1,KC_WH_U, KC_MS_BTN2,KC_DEL,_______, _______, KC_BSPC, KC_UP,   KC_DEL,  KC_PGUP, _______, _______, _______,        \
         _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PGDN, _______,          _______, \
@@ -80,7 +81,7 @@ _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_
         Caps     A        S        D        F        G        H        J        K        L        ;        '                 Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-[ _FLN ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( //Numpad and alt shortcuts
+[ _FLN ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( // Numpad Layer
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,KC_NUMLOCK, \
         _______, _______, _______, KC_KP_7, KC_KP_8, KC_KP_9, _______, KC_BSPC, KC_UP,   KC_DEL,  KC_PGUP, _______, _______, _______,         \
         _______, _______, _______, KC_KP_4, KC_KP_5, KC_KP_6, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PGDN, _______,          _______, \
@@ -104,8 +105,8 @@ _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_
         Caps     A        S        D        F        G        H        J        K        L        ;        '                 Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-[ _FLM ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( //Macros
-   LALT(KC_GRV), RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______,  _______, _______,_______, \
+[ _FLM ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( // Macros etc.
+   LALT(KC_GRV), RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, M(M_ARW1),M(M_ARW2),_______,_______, \
         _______, _______, _______, _______, _______, _______, _______,M(M_USER),LSFT(KC_INS), _______,KC_PAUSE, _______, _______,_______,          \
         _______, BL_STEP, _______, BL_TOGG, _______, _______, _______, _______, _______, M(M_LINE),_______, _______,         _______, \
 _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FLN),TO(_FLP),_______,_______,M(M_COM),_______,        _______,\
@@ -116,7 +117,7 @@ _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FL
         Caps     A        S        D        F        G        H        J        K        L        ;        '                 Enter
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
-  [ _FLP ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( //Mostly mouse layer with option for caps too
+  [ _FLP ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( // Mouse Layer
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,_______, \
       _______, KC_MS_BTN1,KC_WH_U,KC_MS_BTN2,_______,_______, _______, _______, KC_MS_U, _______, _______, _______, _______, _______,         \
         _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,          _______, \
@@ -134,6 +135,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
   if (record->event.pressed) {
     switch(id) {
+      case M_ARW1:
+         return MACRO(T(MINS), D(LSFT), T(DOT), U(LSFT), END);
+       case M_ARW2:
+         return MACRO(T(EQL), D(LSFT), T(DOT), U(LSFT), END);
       case M_USER:
         SEND_STRING("UK"SS_TAP(X_NONUS_BSLASH)"neal.clark"SS_TAP(X_TAB));
         return false;
@@ -158,16 +163,6 @@ void escape_and_altf4_tapdance(qk_tap_dance_state_t *state, void *user_data) {
   } 
   else if (state->count == 3) {
     TAP_WITH_MOD(KC_LALT, KC_F4);
-  }
-}
-
-//Turned this off for now, it made using this key in normal use a bit awkward
-void minus_arrow_tapdance(qk_tap_dance_state_t *state, void *user_data) {
-  switch(state->count)
-  {
-    case 1: TAP(KC_MINS); break;
-    case 2: TAP(KC_MINS); TAP(KC_MINS); break;
-    case 3: TAP(KC_MINS); TAP_WITH_MOD(KC_LSHIFT, KC_DOT); break;
   }
 }
 
@@ -263,8 +258,7 @@ void ctrltap_reset(qk_tap_dance_state_t *state, void *user_data) {
 
 qk_tap_dance_action_t tap_dance_actions[] = {
   [CTRL_CAD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctrltap_finished, ctrltap_reset),
-  [ESC_ALTF4] = ACTION_TAP_DANCE_FN(escape_and_altf4_tapdance),
-  [MINUS_ARROW] = ACTION_TAP_DANCE_FN(minus_arrow_tapdance)
+  [ESC_ALTF4] = ACTION_TAP_DANCE_FN(escape_and_altf4_tapdance)
 };
 
 
