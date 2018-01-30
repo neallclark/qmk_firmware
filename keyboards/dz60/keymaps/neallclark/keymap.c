@@ -7,6 +7,7 @@
 #define _FLN 3  // Numpad function layer 
 #define _FLA 4  // Arrow nav cluster
 #define _FLP 5  // Pointer device (err.... mouse but I'd used m already :) )
+#define _FLALT 6// mostly alt codes with a few exceptions
 
 #define MODS_CTRL_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  RCTL_T(KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSPC,         \
  LT(_FL,KC_BSPC),KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  \
 MT(MOD_LSFT,KC_HOME),KC_NUBS,KC_Z, KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT(MOD_RSFT,KC_END),LT(_FLM,KC_NONUS_HASH),  \
-   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                      KC_RALT,MO(_FL), LT(_FLN,KC_APP),KC_RCTL),             
+   TD(CTRL_CAD), KC_LGUI, KC_LALT,          KC_SPC,                                    MO(_FLALT),MO(_FL), LT(_FLN,KC_APP),KC_RCTL),             
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        ~       Pause
         Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        Backsp
@@ -123,6 +124,19 @@ _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FL
         _______, KC_WH_L, KC_WH_D, KC_WH_R, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______,          _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,         _______,  \
         _______, _______, _______,          _______,                                              _______, _______, _______,TO(_BL)),
+
+    /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        ~       Pause
+        Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        Backsp
+        Caps     A        S        D        F        G        H        J        K        L        ;        '                 Enter
+        Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
+        Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
+[ _FLALT ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( // mostly alt codes with a few exceptions
+   RALT(KC_ESC), _______, _______, _______,RALT(KC_4),_______,_______, _______, _______, _______, _______,M(M_ARW1),M(M_ARW2),RALT(KC_GRV),_______, \
+        _______, _______, _______, RALT(KC_E),_______,_______,_______,RALT(KC_U),RALT(KC_I),RALT(KC_O),_______,_______,_______,_______,         \
+        _______,RALT(KC_A),_______,_______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, \
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+        _______, _______, _______,          _______,                                              _______, _______, _______, _______),
+
 };
 
 /*
