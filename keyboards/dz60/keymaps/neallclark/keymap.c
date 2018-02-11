@@ -22,8 +22,12 @@ enum {
   M_LINE,
   M_COM,
   M_ARW1,
-  M_ARW2
+  M_ARW2,
+  M_SQR,
+  M_CUB,
+  M_DEG
 };
+
 
 #include "dynamic_macro.h"
 
@@ -36,6 +40,11 @@ enum {
 // increase readability
 #define _______  KC_TRNS
 #define XXXXX    KC_NO
+
+// custom keycodes for
+#define KC_UNDO LCTL(KC_Z)
+#define LAS(kc) (kc | QK_LALT | QK_LSFT)
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -107,7 +116,7 @@ _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
 [ _FLM ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( // Macros etc.
-   LALT(KC_GRV), RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, M(M_ARW1),M(M_ARW2),_______,_______, \
+        KC_UNDO, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, M(M_ARW1),M(M_ARW2),_______,_______, \
         _______, _______, _______, _______, _______, _______, _______,M(M_USER),LSFT(KC_INS), _______,KC_PAUSE, _______, _______,_______,          \
         _______, BL_STEP, _______, BL_TOGG, _______, _______, _______, _______, _______, M(M_LINE),_______, _______,         _______, \
 _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FLN),TO(_FLP),_______,_______,M(M_COM),_______,        _______,\
@@ -131,9 +140,9 @@ _______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FL
         Shift    \        Z        X        C        V        B        N        M        ,        .        /        Shift            FN
         Ctrl     Win      Alt               Space                                                 Alt      Win      Menu     Ctrl     */
 [ _FLALT ] = KEYMAP_SPLIT_EVERYTHING_BUT_SPACE( // mostly alt codes with a few exceptions
-   RALT(KC_ESC), _______, _______, _______,RALT(KC_4),_______,_______, _______, _______, _______, _______,M(M_ARW1),M(M_ARW2),RALT(KC_GRV),_______, \
+   LAS(KC_GRV), _______, M(M_SQR),M(M_CUB),RALT(KC_4),_______,_______, _______, _______, _______, _______,M(M_ARW1),M(M_ARW2),RALT(KC_GRV),KC_NUMLOCK, \
         _______, _______, _______, RALT(KC_E),_______,_______,_______,RALT(KC_U),RALT(KC_I),RALT(KC_O),_______,_______,_______,_______,         \
-        _______,RALT(KC_A),_______,_______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, \
+        _______,RALT(KC_A),_______,M(M_DEG),_______, _______, _______, _______, _______, _______, _______, _______,          _______, \
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
         _______, _______, _______,          _______,                                              _______, _______, _______, _______),
 
@@ -161,6 +170,14 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
       case M_COM:
         SEND_STRING("/**/"SS_TAP(X_LEFT)SS_TAP(X_LEFT));
         return false;
+
+      //Alt code macros
+      case M_SQR:
+        return MACRO(D(LALT),T(KP_0),T(KP_1),T(KP_7),T(KP_8),U(LALT), END);
+      case M_CUB:
+        return MACRO(D(LALT),T(KP_0),T(KP_1),T(KP_7),T(KP_9),U(LALT), END);
+      case M_DEG:
+        return MACRO(D(LALT),T(KP_0),T(KP_1),T(KP_7),T(KP_6),U(LALT), END);
     }
   }
   return MACRO_NONE;
