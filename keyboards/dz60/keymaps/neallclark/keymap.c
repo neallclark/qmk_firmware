@@ -25,7 +25,8 @@ enum {
   M_ARW2,
   M_SQR,
   M_CUB,
-  M_DEG
+  M_DEG,
+  M_CTAG
 };
 
 
@@ -119,7 +120,7 @@ _______, DYN_REC_START1,DYN_REC_STOP,DYN_MACRO_PLAY1,KC_VOLD,KC_VOLU,_______,KC_
         KC_UNDO, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, M(M_ARW1),M(M_ARW2),_______,_______, \
         _______, _______, _______, _______, _______, _______, _______,M(M_USER),LSFT(KC_INS), _______,KC_PAUSE, _______, _______,_______,          \
         _______, BL_STEP, _______, BL_TOGG, _______, _______, _______, _______, _______, M(M_LINE),_______, _______,         _______, \
-_______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FLN),TO(_FLP),_______,_______,M(M_COM),_______,        _______,\
+_______,DYN_REC_START2,DYN_REC_STOP,DYN_MACRO_PLAY2,_______,_______,RESET,TO(_FLN),TO(_FLP),_______,M(M_CTAG),M(M_COM),_______,        _______,\
         _______, _______, _______,          TO(_FLA),                                             _______, _______, TO(_BL), TO(_BL)),
 
     /*  ESC      1        2        3        4        5        6        7        8        9        0        -        =        ~       Pause
@@ -158,18 +159,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
   if (record->event.pressed) {
     switch(id) {
-      case M_ARW1:
+      case M_ARW1: // ->
          return MACRO(T(MINS), D(LSFT), T(DOT), U(LSFT), END);
-       case M_ARW2:
+       case M_ARW2: // =>
          return MACRO(T(EQL), D(LSFT), T(DOT), U(LSFT), END);
       case M_USER:
         SEND_STRING("UK"SS_TAP(X_NONUS_BSLASH)"neal.clark"SS_TAP(X_TAB));
         return false;
-      case M_LINE:
+      case M_LINE: // selects a line of text
         return MACRO(T(HOME), D(LSFT), T(END), U(LSFT), END);
       case M_COM:
         SEND_STRING("/**/"SS_TAP(X_LEFT)SS_TAP(X_LEFT));
         return false;
+      case M_CTAG: // />
+        return MACRO(T(SLSH), D(LSFT), T(DOT), U(LSFT), END);
 
       //Alt code macros
       case M_SQR:
@@ -291,44 +294,3 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [CTRL_CAD] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ctrltap_finished, ctrltap_reset),
   [ESC_ALTF4] = ACTION_TAP_DANCE_FN(escape_and_altf4_tapdance)
 };
-
-
-/*
-  Runs constantly in the background, in a loop.
-*/
-/*void matrix_scan_user(void) {
-  
-  uint8_t layer = biton32(layer_state);
-  
-  switch (layer) {
-    case _BL:
-      satan_caps_led_off();
-      backlight_set(0);
-      break;
-    
-    case _FL:
-      backlight_set(0);
-      satan_caps_led_on();
-      break;
-    
-    case _FLM:
-      backlight_set(2);
-      satan_caps_led_on();
-      break;
-
-    case _FLN:
-      backlight_set(1);
-      satan_caps_led_on();
-      break;
-
-    case _FLA:
-      backlight_set(0);
-      satan_caps_led_on();
-      break;
-
-    case _FLP:
-      backlight_set(0);
-      satan_caps_led_on();
-      break;
-  }
-};*/
